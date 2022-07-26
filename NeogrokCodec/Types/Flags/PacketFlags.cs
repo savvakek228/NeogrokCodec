@@ -23,13 +23,4 @@ public static class PacketFlagsExt
 
         return (PacketFlags)flags;
     }
-    
-    public static bool IsCompressed(this PacketFlags flags)
-        => (flags & PacketFlags.Compressed) == PacketFlags.Compressed;
-
-    public static bool IsShort(this PacketFlags flags)
-        => (flags & PacketFlags.Short) == PacketFlags.Short;
-    
-    public static bool IsCShort(this PacketFlags flags)
-        => (flags & PacketFlags.CShort) == PacketFlags.CShort;
 }

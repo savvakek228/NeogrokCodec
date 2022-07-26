@@ -4,7 +4,6 @@ using NeogrokCodec.Config;
 using NeogrokCodec.Types;
 using NeogrokCodec.Types.Exceptions;
 using NeogrokCodec.Types.Flags;
-using NeogrokCodec.Types.Frames;
 
 namespace NeogrokCodec.Codec;
 
@@ -32,7 +31,21 @@ public class CodecReader
                     case Side.Client:
                         return new ServerResponse("0.0.0.0", await ReadU16LeAsync());
                     case Side.Server:
-                        return new ServerRequest();
+                        if (pktType.Flags.HasFlag(PacketFlags.CShort))
+                        {
+                            return new ServerRequest(TransportProtocol.Tcp, await ReadU16LeAsync());
+                        } else if (pktType.Flags.HasFlag(PacketFlags.Short))
+                        {
+                            return new ServerRequest(TransportProtocol.Tcp, 0);
+                        } else if (pktType.Flags.HasFlag(PacketFlags.Compressed))
+                        {
+                            return new ServerRequest(TransportProtocolExt.Parse(await ReadByteAsync()), 0);
+                        }
+                        else
+                        {
+                            return new ServerRequest(TransportProtocolExt.Parse(await ReadByteAsync()),
+                                await ReadU16LeAsync());
+                        }
                 }
 
                 break;
@@ -52,7 +65,7 @@ public class CodecReader
                 var clientId = await ReadClientIdAsync(pktType.Flags);
                 var length = await ReadPacketLengthAsync(pktType.Flags);
 
-                if (pktType.Flags.IsCompressed())
+                if (pktType.Flags.HasFlag(PacketFlags.Compressed))
                 {
                     // TODO: Implement decompression
                     throw new NotImplementedException();
