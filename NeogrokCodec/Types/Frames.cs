@@ -2,7 +2,7 @@ using NeogrokCodec.Config;
 using NeogrokCodec.Types;
 using NeogrokCodec.Types.Flags;
 
-namespace NeogrokCodec;
+namespace NeogrokCodec.Types;
 
 public record Auth(byte[] Magic) : IFrame;
 public record Connect(ClientId Id) : IFrame;

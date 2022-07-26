@@ -13,4 +13,6 @@ public class CodecWriter
         Side = side;
         _writer = writer;
     }
+    
+    
 }
