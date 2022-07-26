@@ -2,15 +2,15 @@ namespace NeogrokCodec;
 
 public enum FrameType
 {
-    Ping,
-    Sync,
+    Ping         = 1,
+    Sync         = 6,
     
-    UpdateRights,
+    UpdateRights = 8,
     
-    Server,
-    Authorize,  // unimplemented, sent only by server
-    Connect,
-    Forward,
-    Disconnect,
-    Error,
+    Server       = 7,
+    Authorize    = 2,  // unimplemented, sent only by server
+    Connect      = 3,
+    Forward      = 4,
+    Disconnect   = 5,
+    Error        = 0,
 }
