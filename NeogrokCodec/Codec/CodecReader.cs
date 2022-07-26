@@ -116,9 +116,9 @@ public class CodecReader
                 switch (Side)
                 {
                     case Side.Client:
-                        throw new UnsupportedType(Side.Client);
-                    case Side.Server:
                         return new UpdateRights(RightsFlagsExt.Parse(await ReadByteAsync()));
+                    case Side.Server:
+                        throw new UnsupportedType(Side.Client);
                 }
 
                 break;
