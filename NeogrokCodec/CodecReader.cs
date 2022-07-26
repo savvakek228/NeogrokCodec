@@ -45,8 +45,6 @@ public class CodecReader
             default:
                 throw new NotImplementedException();
         }
-        
-        throw new NotImplementedException();
     }
 
     protected async Task<string> ReadStringAsync()
