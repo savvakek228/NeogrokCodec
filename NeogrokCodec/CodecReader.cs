@@ -29,6 +29,11 @@ public class CodecReader
                 var clientId = await ReadClientIdAsync(type.Flags);
                 var length = await ReadPacketLengthAsync(type.Flags);
 
+                if (type.IsCompressed)
+                {
+                    throw new NotImplementedException("No ZStandard compression currently implemented");
+                }
+
                 return new Forward(clientId, await ReadExactAsync(length));
 
             case FrameType.Server:
