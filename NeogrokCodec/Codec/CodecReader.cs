@@ -143,9 +143,7 @@ public class CodecReader
     }
 
     private async Task<ErrorCode> ReadErrorCodeAsync()
-    {
-        return ErrorCodeExt.Parse(await ReadByteAsync());
-    }
+        => ErrorCodeExt.Parse(await ReadByteAsync());
 
     private async Task<ClientId> ReadClientIdAsync(PacketFlags flags)
         => new ClientId(await ReadVariadicAsync(flags, PacketFlags.CShort));

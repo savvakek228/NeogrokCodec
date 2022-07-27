@@ -182,13 +182,9 @@ public class CodecWriter
         await _writer.WriteAsync(buffer, 0, length);
     }
 
-    private async Task WriteByteAsync(byte data)
-    {
+    private async Task WriteByteAsync(byte data) => 
         await _writer.WriteAsync(new[] { data });
-    }
     
     private static byte EncodeFrameType(FrameType frameType, PacketFlags flags)
-    {
-        return (byte)(((byte)frameType << 3) | (byte)flags);
-    }
+        => (byte)(((byte)frameType << 3) | (byte)flags);
 }
