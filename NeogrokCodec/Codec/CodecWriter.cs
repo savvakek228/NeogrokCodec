@@ -175,7 +175,7 @@ public class CodecWriter
         
         if (!isShort)
         {
-            buffer[3] = (byte)(value >> 8);
+            buffer[2] = (byte)(value >> 8);
             length = 3;
         }
 
@@ -188,3 +188,4 @@ public class CodecWriter
     private static byte EncodeFrameType(FrameType frameType, PacketFlags flags)
         => (byte)(((byte)frameType << 3) | (byte)flags);
 }
+
