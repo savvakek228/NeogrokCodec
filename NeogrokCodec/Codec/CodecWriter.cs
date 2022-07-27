@@ -173,10 +173,7 @@ public class CodecWriter
         buffer[0] = encoded;
         buffer[1] = (byte)(value & 0xff);
         
-        if (isShort)
-        {
-        }
-        else
+        if (!isShort)
         {
             buffer[3] = (byte)(value >> 8);
             length = 3;
