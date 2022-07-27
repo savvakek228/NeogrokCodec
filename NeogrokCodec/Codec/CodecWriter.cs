@@ -175,7 +175,7 @@ public class CodecWriter
         
         if (!isShort)
         {
-            buffer[3] = (byte)(value >> 8);
+            buffer[2] = (byte)(value >> 8);
             length = 3;
         }
 
